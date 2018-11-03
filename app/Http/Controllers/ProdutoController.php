@@ -10,7 +10,7 @@ class ProdutoController extends Controller
     public function lista(){
         $produtos = DB::select('select * from produtos;');
 
-        return view('produto/listagem')->withProdutos($produtos);
+        return view('produto.listagem')->withProdutos($produtos);
 //        return view('produto/listagem', [
 //            'produtos' => $produtos,
 //            'teste' => 'Hakuna',
@@ -27,6 +27,6 @@ class ProdutoController extends Controller
         if (empty($produto)){
             return "Esse produto não existe!";
         }
-        return view('produto/detalhes')->with('p', $produto[0]);
+        return view('produto.detalhes')->with('p', $produto[0]);
     }
 }
