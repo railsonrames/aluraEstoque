@@ -2,11 +2,17 @@
 @section('conteudo')
     <br/>
     <div class="row">
+        @if(old('nome'))
+            <div class="alert-success alert">
+                <strong>Sucesso!</strong> O produto {{old('nome')}} adicionado com sucesso!
+            </div>
+            <br/>
+        @endif
         @if(empty($produtos))
             <div class="alert-danger alert">Você não tem nenhum produto cadastrado.</div>
         @else
+            <br/>
             <div class="h1">Lista de Produtos Cadastrados</div>
-
             <table class="table table-striped table-hover table-bordered">
                 <tr>
                     <th>Nome</th>
