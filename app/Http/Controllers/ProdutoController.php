@@ -2,13 +2,17 @@
 
 namespace estoque\Http\Controllers;
 
+use estoque\Models\Janela;
+use Illuminate\Container\Container;
 use Request;
 use Illuminate\Support\Facades\DB;
+use estoque\Produto;
 
 class ProdutoController extends Controller
 {
     public function lista(){
-        $produtos = DB::select('select * from produtos;');
+//        $produtos = DB::select('select * from produtos;');
+        $produtos = Produto::all();
 
         return view('produto.listagem')->withProdutos($produtos);
 //        return view('produto/listagem', [
@@ -22,12 +26,12 @@ class ProdutoController extends Controller
     public function detalhes(){
 //        $id = Request::input('id');
         $id = Request::route('id');
-        $produto = DB::select('select * from produtos where id = ?', [$id]);
+        $produto = Produto::find($id);
 
         if (empty($produto)){
             return "Esse produto não existe!";
         }
-        return view('produto.detalhes')->with('p', $produto[0]);
+        return view('produto.detalhes')->with('p', $produto);
     }
 
     public function novo(){
@@ -54,5 +58,15 @@ class ProdutoController extends Controller
 //        $headers = array('Content/Type: application/txt');
 //        return response()->download($arquivo, 'arquivoBaixado.txt', $headers); // Excelente
 
+    }
+
+    public function qualNamespace(){
+        $resultado = Container::getInstance()->getNamespace();
+        return $resultado;
+    }
+
+    public function testandoJanelas(){
+        $resultado = Janela::all();
+        return $resultado;
     }
 }
