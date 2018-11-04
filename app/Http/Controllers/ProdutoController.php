@@ -46,4 +46,13 @@ class ProdutoController extends Controller
 //        return view('produto.adicionado')->with('nome', $nome);
         return redirect()->action('ProdutoController@lista')->withInput(Request::Only('nome'));
     }
+
+    public function listaJson(){
+        $produtos = DB::select('select * from produtos');
+        return response()->json($produtos); // Se eu enviasse a variável $produtos ele já faria a conversão para JSON, pois é o formato padrão adotado pelo Laravel.
+//        $arquivo = public_path(). '/robots.txt';
+//        $headers = array('Content/Type: application/txt');
+//        return response()->download($arquivo, 'arquivoBaixado.txt', $headers); // Excelente
+
+    }
 }
