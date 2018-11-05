@@ -39,19 +39,7 @@ class ProdutoController extends Controller
     }
 
     public function adiciona(){
-
-        $params = Request::all();
-        $produto = new Produto($params);
-//        $produto->nome = Request::input('nome');
-//        $produto->valor = Request::input('valor');
-//        $produto->descricao = Request::input('descricao');
-//        $produto->quantidade = Request::input('quantidade');
-
-        $produto->save();
-//        DB::insert('insert into produtos (nome, valor, descricao, quantidade) values (?,?,?,?)',
-//            array($nome, $valor, $descricao, $quantidade));
-
-//        return view('produto.adicionado')->with('nome', $nome);
+        Produto::create(Request::all());
         return redirect()->action('ProdutoController@lista')->withInput(Request::Only('nome'));
     }
 
