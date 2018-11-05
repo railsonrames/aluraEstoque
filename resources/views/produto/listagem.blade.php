@@ -19,7 +19,7 @@
                     <th>Valor</th>
                     <th>Descrição</th>
                     <th>Quantidade</th>
-                    <th>Ações</th>
+                    <th colspan="2">Ações</th>
                 </tr>
                 <?php foreach ($produtos as $produto): ?>
                 <tr class="{{$produto->quantidade <= 20 ? 'danger' : '' }}">
@@ -29,6 +29,10 @@
                     <td>{{$produto->quantidade}}</td>
                     <td>
                         <a href="produtos/detalhes/{{$produto->id}}"><span class="glyphicon glyphicon-search"
+                                                                           aria-hidden="true"></span></a>
+                    </td>
+                    <td>
+                        <a href="produtos/remove/{{$produto->id}}"><span class="glyphicon glyphicon-trash"
                                                                            aria-hidden="true"></span></a>
                     </td>
                 </tr>

@@ -11,21 +11,12 @@ use estoque\Produto;
 class ProdutoController extends Controller
 {
     public function lista(){
-//        $produtos = DB::select('select * from produtos;');
         $produtos = Produto::all();
-
         return view('produto.listagem')->withProdutos($produtos);
-//        return view('produto/listagem', [
-//            'produtos' => $produtos,
-//            'teste' => 'Hakuna',
-//            'testeDo' => 'Matata'
-//        ]);
-//      Com o array eu posso passar mais de uma variável para a view utilizar.
     }
 
-    public function detalhes(){
-//        $id = Request::input('id');
-        $id = Request::route('id');
+    public function detalhes($id){
+
         $produto = Produto::find($id);
 
         if (empty($produto)){
@@ -45,11 +36,7 @@ class ProdutoController extends Controller
 
     public function listaJson(){
         $produtos = DB::select('select * from produtos');
-        return response()->json($produtos); // Se eu enviasse a variável $produtos ele já faria a conversão para JSON, pois é o formato padrão adotado pelo Laravel.
-//        $arquivo = public_path(). '/robots.txt';
-//        $headers = array('Content/Type: application/txt');
-//        return response()->download($arquivo, 'arquivoBaixado.txt', $headers); // Excelente
-
+        return response()->json($produtos);
     }
 
     public function qualNamespace(){
@@ -60,5 +47,12 @@ class ProdutoController extends Controller
     public function testandoJanelas(){
         $resultado = Janela::all();
         return $resultado;
+    }
+
+    public function remove($id){
+
+        $produto = Produto::find($id);
+        $produto->delete();
+        return redirect()->action('ProdutoController@lista')->withInput(Request::Only('nome'));
     }
 }
