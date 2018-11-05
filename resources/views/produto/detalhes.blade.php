@@ -13,5 +13,5 @@
             </tr>
         </table>
     </div>
-    <a class="btn btn-primary btn-lg float-right" href="/produtos">Voltar</a>
+    <a class="btn btn-primary btn-lg float-right"  href="{{action('ProdutoController@lista')}}">Voltar</a>
 @stop

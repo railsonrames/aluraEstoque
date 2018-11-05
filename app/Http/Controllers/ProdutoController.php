@@ -39,12 +39,13 @@ class ProdutoController extends Controller
     }
 
     public function adiciona(){
-        $produto = new Produto();
 
-        $produto->nome = Request::input('nome');
-        $produto->valor = Request::input('valor');
-        $produto->descricao = Request::input('descricao');
-        $produto->quantidade = Request::input('quantidade');
+        $params = Request::all();
+        $produto = new Produto($params);
+//        $produto->nome = Request::input('nome');
+//        $produto->valor = Request::input('valor');
+//        $produto->descricao = Request::input('descricao');
+//        $produto->quantidade = Request::input('quantidade');
 
         $produto->save();
 //        DB::insert('insert into produtos (nome, valor, descricao, quantidade) values (?,?,?,?)',
